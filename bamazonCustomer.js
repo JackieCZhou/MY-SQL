@@ -70,7 +70,7 @@ function finishOrder(ID, amtNeeded) {
             console.log("Congratulations! your item is in stock!");
             console.log("Your total cost for " + amtNeeded + " " + res[0].product_name + " is $" + totalCost + " Thank you for your order!");
 
-            var updateQuery = "UPDATE products SET stock_quantity = " + (amtNeeded - res[0].stock_quantity) + " WHERE item_id = " + ID;
+            var updateQuery = "UPDATE products SET stock_quantity = " + (res[0].stock_quantity - amtNeeded  ) + " WHERE item_id = " + ID;
             connection.query(updateQuery, function (err, res) {
                 if (err) { console.log(err) };
 
@@ -83,36 +83,3 @@ function finishOrder(ID, amtNeeded) {
 }
 
 listProducts();
-
-
-    //     .then(function (input) {
-
-    //         var item = input.item_id;
-    //         var quantity = input.stock_quantity;
-    //         var query = "SELECT * FROM products WHERE ?";
-
-    //         connection.query(query, { item_id: item }, function (err, data) {
-    //             if (err) throw err;
-
-    //             if (data.length === 0) {
-    //                 console.log("ERROR: Invalid Item ID. Please select a valid Item ID.");
-
-    //             } else {
-    //                 var productData = data[0];
-    //                 if (quantity <= productData.stock_quantity) {
-    //                     console.log("Your requested item is available! Placing Order!");
-
-    //                     var updateQuery = "UPDATE products SET stock_quantity = " + (productData.stock_quantity - quantity) + "WHERE item_id = " + item;
-
-    //                     connection.query(updateQuery, function (err, data) {
-    //                         if (err) throw err;
-
-    //                         console.log("Order Placed! Your total is $" + productData.price * quantity);
-    //                         console.log("Thank you for shopping with Bamazon!!");
-    //                         console.log("\n---------------------------------------------------------------------\n");
-
-    //                         connection.end();
-    //                     })
-
-/* /* connection.query('Select * FROM products WHERE item_id = ' + ID, function(err,res){
- */
