@@ -23,7 +23,7 @@ var listProducts = function(){
 	connection.query(query, function(err, res){
 		if(err) throw err;
 		var displayTable = new Table ({
-			head: ["Item ID", "Product Name", "Catergory", "Price", "Quantity"],
+			head: ["Item ID", "Product Name", "Category", "Price", "Quantity"],
 			colWidths: [10,15,15,10,10]
 		});
 		for(var i = 0; i < res.length; i++){
@@ -61,7 +61,6 @@ var listProducts = function(){
 
                 if (data.length === 0) {
                     console.log("ERROR: Invalid Item ID. Please select a valid Item ID.");
-                    listProducts();
 
                 } else {
                     var productData = data[0];
@@ -73,7 +72,7 @@ var listProducts = function(){
                         connection.query(updateQuery, function (err, data) {
                             if (err) throw err;
 
-                            console.log("Order Placed! Your total is $' + productData.price * quantity");
+                            console.log("Order Placed! Your total is $" + productData.price * quantity);
                             console.log("Thank you for shopping with Bamazon!!");
                             console.log("\n---------------------------------------------------------------------\n");
 
